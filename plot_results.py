@@ -178,11 +178,11 @@ def plot_results():
 	plt.xlabel('Time (s)', fontsize='x-large')
 	plt.xlim(0, 120)
 	plt.xticks(np.arange(0, 121, 30))
-	plt.ylabel('Total Throughput\n(Mbit)', fontsize='x-large')
+	plt.ylabel('Network Total Throughput\n(Mbit)', fontsize='x-large')
 	plt.ylim(0, utmost_throughput)
 	plt.yticks(np.linspace(0, utmost_throughput, 11))
 	plt.grid(True)
-	plt.savefig('./results/1.total_throughput.png')
+	plt.savefig('./results/1.network_total_throughput.png')
 
 	# 2. Plot realtime speed of individual flow.
 	fig = plt.figure()
@@ -217,11 +217,11 @@ def plot_results():
 	plt.xlabel('Time (s)', fontsize='x-large')
 	plt.xlim(0, 120)
 	plt.xticks(np.arange(0, 121, 30))
-	plt.ylabel('Realtime Throughput\n(Mbit/s)', fontsize='x-large')
+	plt.ylabel('Network Unit Time Throughput\n(Mbit/s)', fontsize='x-large')
 	plt.ylim(0, bandwidth)
 	plt.yticks(np.linspace(0, bandwidth, 11))
 	plt.grid(True)
-	plt.savefig('./results/3.realtime_throught.png')
+	plt.savefig('./results/3.network_unit_time_throught.png')
 
 	# 4. Plot round-trip delay of ping traffic.
 	fig = plt.figure()

@@ -101,8 +101,8 @@ def get_value_list_2(value_dict):
 	"""
 		Get the values from the "roundtrip_delay" data structure.
 	"""
-	value_list = []
-	sequence_list = []
+	value_list = [0]
+	sequence_list = [0]
 	for i in xrange(121):
 		if value_dict[i] != 0:
 			sequence_list.append(i)
@@ -115,8 +115,9 @@ def get_value_list_3(value_dict, sequence):
 	"""
 	num = 0
 	for i in xrange(sequence, sequence + 30):
-		if value_dict[i] == 0:
-			num += 1
+		if i != 0:
+			if value_dict[i] == 0:
+				num += 1
 	rate = num / 30.0
 	return rate
 
@@ -124,8 +125,8 @@ def get_value_list_4(value_dict):
 	"""
 		Get the values from the "roundtrip_delay" data structure.
 	"""
-	value_list = []
-	sequence_list = []
+	value_list = [0]
+	sequence_list = [0]
 	for i in xrange(61):
 		if value_dict[i] != 0:
 			sequence_list.append(i)
@@ -189,10 +190,10 @@ def plot_results():
 	x = np.arange(0, 121)
 	y = get_value_list_1(total_throughput)
 	plt.plot(x, y, 'r-', linewidth=2)
-	plt.xlabel(u'时间 (s)', fontsize='x-large', fontproperties=chinese_font)
+	plt.xlabel(u'时间 (s)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.xlim(0, 120)
 	plt.xticks(np.arange(0, 121, 30))
-	plt.ylabel(u'总吞吐量\n(Mbit)', fontsize='x-large', fontproperties=chinese_font)
+	plt.ylabel(u'网络总吞吐量\n(Mbit)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.ylim(0, utmost_throughput)
 	plt.yticks(np.linspace(0, utmost_throughput, 11))
 	plt.grid(True)
@@ -211,10 +212,10 @@ def plot_results():
 	plt.plot(x, y1, 'r-', linewidth=2, label="Ping")
 	plt.plot(x, y2, 'g-', linewidth=2, label="Iperf1")
 	plt.plot(x, y3, 'b-', linewidth=2, label="Iperf2")
-	plt.xlabel(u'时间 (s)', fontsize='x-large', fontproperties=chinese_font)
+	plt.xlabel(u'时间 (s)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.xlim(0, 120)
 	plt.xticks(np.arange(0, 121, 30))
-	plt.ylabel(u'每条流的实时速率\n(Mbit/s)', fontsize='x-large', fontproperties=chinese_font)
+	plt.ylabel(u'每条流的实时速率\n(Mbit/s)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.ylim(0, bandwidth)
 	plt.yticks(np.linspace(0, bandwidth, 11))
 	plt.legend(loc='upper right', ncol=3, fontsize='small')
@@ -228,24 +229,24 @@ def plot_results():
 	realtime_speed = get_realtime_speed('s2-eth[1-3]')
 	y = get_value_list_1(realtime_speed)
 	plt.plot(x, y, 'r-', linewidth=2)
-	plt.xlabel(u'时间 (s)', fontsize='x-large', fontproperties=chinese_font)
+	plt.xlabel(u'时间 (s)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.xlim(0, 120)
 	plt.xticks(np.arange(0, 121, 30))
-	plt.ylabel(u'实时吞吐量\n(Mbit/s)', fontsize='x-large', fontproperties=chinese_font)
+	plt.ylabel(u'网络单位时间吞吐量\n(Mbit/s)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.ylim(0, bandwidth)
 	plt.yticks(np.linspace(0, bandwidth, 11))
 	plt.grid(True)
-	plt.savefig('./results/3.realtime_throught.png')
+	plt.savefig('./results/3.network_unit_time_throught.png')
 
 	# 4. Plot round-trip delay of ping traffic.
 	fig = plt.figure()
 	fig.set_size_inches(12, 6)
 	x, y = get_value_list_2(roundtrip_delay)
 	plt.plot(x, y, 'r-', linewidth=2)
-	plt.xlabel(u'时间 (s)', fontsize='x-large', fontproperties=chinese_font)
+	plt.xlabel(u'时间 (s)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.xlim(0, 120)
 	plt.xticks(np.arange(0, 121, 30))
-	plt.ylabel(u'Ping流量的往返时延\n(ms)', fontsize='x-large', fontproperties=chinese_font)
+	plt.ylabel(u'Ping流量的往返时延\n(ms)', fontsize='xx-large', fontproperties=chinese_font)
 	# plt.ylim(0, bandwidth)
 	# plt.yticks(np.linspace(0, bandwidth, 11))
 	plt.grid(True)
@@ -256,10 +257,10 @@ def plot_results():
 	fig.set_size_inches(12, 6)
 	x, y = get_value_list_4(roundtrip_delay)
 	plt.plot(x, y, 'r-', linewidth=2)
-	plt.xlabel(u'时间 (s)', fontsize='x-large', fontproperties=chinese_font)
+	plt.xlabel(u'时间 (s)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.xlim(0, 60)
 	plt.xticks(np.arange(0, 61, 30))
-	plt.ylabel(u'Ping流量的往返时延\n(ms)', fontsize='x-large', fontproperties=chinese_font)
+	plt.ylabel(u'Ping流量的往返时延\n(ms)', fontsize='xx-large', fontproperties=chinese_font)
 	# plt.yticks(np.linspace(0, 50, 6))
 	plt.grid(True)
 	plt.savefig('./results/4-2.round-trip_delay_of_ping_traffic.png')
@@ -279,10 +280,10 @@ def plot_results():
 	plt.bar(index + 1 * bar_width, second_thirty, bar_width, color='g', label='30-60s')
 	plt.bar(index + 2 * bar_width, third_thirty, bar_width, color='b', label='60-90s')
 	plt.bar(index + 3 * bar_width, fourth_thirty, bar_width, color='y', label='90-120s')
-	plt.xlabel(u'时间 (s)', fontsize='x-large', fontproperties=chinese_font)
+	plt.xlabel(u'时间 (s)', fontsize='xx-large', fontproperties=chinese_font)
 	plt.xlim(0, 120)
 	plt.xticks(np.linspace(0, 120, 5))
-	plt.ylabel(u'Ping流量丢包率\n', fontsize='x-large', fontproperties=chinese_font)
+	plt.ylabel(u'Ping流量的丢包率\n', fontsize='xx-large', fontproperties=chinese_font)
 	plt.ylim(0, 1)
 	plt.yticks(np.linspace(0, 1, 11))
 	plt.legend(loc='upper right', fontsize='medium')
